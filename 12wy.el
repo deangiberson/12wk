@@ -32,6 +32,12 @@
   :type 'integer
   :group '12wy)
 
+(defcustom 12wy-directory nil
+  "Default directory for 12-week year org files.
+Used as starting directory when selecting a file."
+  :type '(choice (const nil) directory)
+  :group '12wy)
+
 ;;; Parsing
 
 (defun 12wy--parse-file ()
@@ -105,7 +111,8 @@
 ;;;###autoload
 (defun 12wy-set-file (file)
   "Set FILE as the 12-week year org file."
-  (interactive "fSelect 12-week year org file: ")
+  (interactive (list (read-file-name "Select 12-week year org file: "
+                                      12wy-directory)))
   (setq 12wy-file file)
   (message "12wy file set to %s" file))
 
